@@ -1,0 +1,507 @@
+Delivered-To: andrea.stagi@lotrek.it
+Received: by 2002:a02:5e0a:0:0:0:0:0 with SMTP id h10csp4373619jab;
+        Mon, 2 Sep 2019 07:04:18 -0700 (PDT)
+X-Received: by 2002:a5d:574c:: with SMTP id q12mr7475242wrw.69.1567433058077;
+        Mon, 02 Sep 2019 07:04:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1567433058; cv=none;
+        d=google.com; s=arc-20160816;
+        b=B5gt4BeGB2TOudefeKXHtnm7WO6hkmvzfRn/u8C79sWe1r1kae5roYi496vQugunvI
+         gBaKpSgV4VK+EoUWssIA9lzE5hUIA1Ac0I4/usaFqLX8jPw9SC421pEpAObP922o+Nl7
+         3BusaP6RrbgvzG68BFe355W+0piWm4vIWtg6Y69pGoLNNeBqnyM9SS8FWBzufIQC8aO8
+         cV61LLVnp/VCRdjt+4kvG3vV+zKB/OeTqLhpFuHy/PE/YW0f8snjfrzUKP/J/rsA9dgS
+         qpKzC0VxuhTAD6bFnf829j8dUGngj3Ngx18thzMkDblm+I8+ihbqPnCZ0zPSubfaiRAA
+         bbuQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=date:to:references:message-id:subject:mime-version:from
+         :dkim-signature;
+        bh=wTJ1+y8EG8PrZET2N4/nLJ1xKnvk/KetzbfXxTtBNBc=;
+        b=m3pbY3FdwQ1xN5695bHmnjiJhwx1Q33SoTA0N1tJGWL4ereUOJ3B54pRMYDwco7WcZ
+         HxMScFrt0G60hHlqMpWTqVH5zqJwuXZVax4O7i+D1qa1hl4GmTaQaVRAFPC3hq+LQc+M
+         O7Gsfpf/0uv4If0VeZQzce1/DLfF1P6l/cCt7JgY0xSceFmF3dtd1AsgYMm7oDZyb6S7
+         p4qK4QEQhgoUwYzzrPTcnwzymVH381/AbzJ0kphq6omX0kWRIoDEaeVt0Yzb0TIPBS98
+         VrgB0pGUEMkDjJFg/UhNWgw9pWYC/6x9OnpjCB/fcB6rLwLPoaIDtctcF/O94PTvfaio
+         8C7g==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@lotrek-it.20150623.gappssmtp.com header.s=20150623 header.b=MrJ11ShA;
+       spf=pass (google.com: domain of andrea.ginanni@lotrek.it designates 209.85.220.41 as permitted sender) smtp.mailfrom=andrea.ginanni@lotrek.it;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=lotrek.it
+Return-Path: <andrea.ginanni@lotrek.it>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id n6sor2197972wrq.15.2019.09.02.07.04.17
+        for <andrea.stagi@lotrek.it>
+        (Google Transport Security);
+        Mon, 02 Sep 2019 07:04:18 -0700 (PDT)
+Received-SPF: pass (google.com: domain of andrea.ginanni@lotrek.it designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@lotrek-it.20150623.gappssmtp.com header.s=20150623 header.b=MrJ11ShA;
+       spf=pass (google.com: domain of andrea.ginanni@lotrek.it designates 209.85.220.41 as permitted sender) smtp.mailfrom=andrea.ginanni@lotrek.it;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=lotrek.it
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=lotrek-it.20150623.gappssmtp.com; s=20150623;
+        h=from:mime-version:subject:message-id:references:to:date;
+        bh=wTJ1+y8EG8PrZET2N4/nLJ1xKnvk/KetzbfXxTtBNBc=;
+        b=MrJ11ShAgNFF/GGNJJzB83jDPlC+ppBjWvRJfpBDSTZO26HlDhN7N1ghQ4TrLQFnEr
+         H5Ij8pg52zecnPkaW+rTOGHcM0FyXU67sTLe0uI9eY6QODiiXKNlm/gd0o5CuF0FKv4U
+         TXWWys89hZt2Y8xM3I0/xG1IQUTl2VGEzum2kR5hywVaAznKTJBrapTHnLtF4KBC1A3I
+         D2qjRWeBl+XNekhPr+T9BYfJB1T7PFMxOXwYvSleZZ9pO58S9KKgv1nci0pHyFjEbAYs
+         ACygyK/bey0xW4cy2j2gad+txr9v9u8b8AbRFkjRVujPfA6XLl5lrQ6fxEA0Fv1YqKUo
+         97xA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:mime-version:subject:message-id:references
+         :to:date;
+        bh=wTJ1+y8EG8PrZET2N4/nLJ1xKnvk/KetzbfXxTtBNBc=;
+        b=IkOtrsGfx43ld82RBBLoc/4J7WxijmyagGnhY8hngZeFIVq5g1k602j1iEy4NTIqtM
+         Fusa+cvil+NnA7Hw+mrUtRbDt4wxTzeNObc5krC52kZP7bF0bhIlaznx6T7L1/CvBDut
+         t3ysJrm2HJHupKWglGqOp/FcnyhSjj4a2Dn39Mux4VOvujREo/nz3z0Aj7U1Xq/nxwh7
+         7QT0bNWxAp1PSkIZBIOgnbXli6szMsoV8kmda31BD+S3pQl3SPXcPhkJ3pwDyuC996O3
+         2y1QoGEh4sUaoilrdhh/1q3P0zLiJlbZSZPsztox1sfhHe1PqSfIHP3EXs7kumLhqCE8
+         r1JQ==
+X-Gm-Message-State: APjAAAUJ96nr7C2q6XtG/B5MWLNVtO7Axu5xVuqAomkPu5mPjvWxKCFY
+	iG6IwXYZnrwPB4FoCZRy+qM7/IuOf1F5Dmxl
+X-Google-Smtp-Source: APXvYqy8Jp7eorxefJH5zAti96aWyFtoUySu6u26Ef1IX7VdO5gc2gyGP9SFcrDIHu4c+lsAcGRXlA==
+X-Received: by 2002:a05:6000:108e:: with SMTP id y14mr7634141wrw.344.1567433057455;
+        Mon, 02 Sep 2019 07:04:17 -0700 (PDT)
+Return-Path: <andrea.ginanni@lotrek.it>
+Received: from [192.168.1.77] ([37.10.87.105])
+        by smtp.gmail.com with ESMTPSA id d28sm12646558wrb.95.2019.09.02.07.04.16
+        for <andrea.stagi@lotrek.it>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 02 Sep 2019 07:04:16 -0700 (PDT)
+From: Andrea Ginanni <andrea.ginanni@lotrek.it>
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_1F735373-27D9-4487-B67F-D73E5DE25F1D"
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
+Subject: Fwd: MENU 8.8P
+Message-Id: <43AA9E61-312D-49F6-8C6E-E5340BB282A4@lotrek.it>
+References: <201908071435.x77EZORH013815@vps3065.inrete.com>
+To: Andrea Stagi <andrea.stagi@lotrek.it>
+Date: Mon, 2 Sep 2019 16:04:14 +0200
+X-Mailer: Apple Mail (2.3445.104.11)
+
+
+--Apple-Mail=_1F735373-27D9-4487-B67F-D73E5DE25F1D
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+
+   =20
+
+
+
+> Inizio messaggio inoltrato:
+>=20
+> Da: "news@lagogabbiano.it" <news@lagogabbiano.it>
+> Oggetto: MENU 8.8P
+> Data: 7 agosto 2019 16:35:24 CEST
+> A: andrea.ginanni@lotrek.it
+>=20
+> MENU' DEL GIORNO 8 AGOSTO 2019
+>=20
+>=20
+> PRIMI PIATTI DI TERRA
+>=20
+> 5.50 Euro
+>=20
+> PENNETTE RIGATE ALL=E2=80=99AMATRICIANA
+>=20
+> TROFIE CON GORGONZOLA PERE E GRANELLA DI NOCI
+>=20
+> RIGATONI ALLA NORMA
+>=20
+> RIGATONI ALLA POMAROLA O ALLA CARRETTIERA
+>=20
+>=20
+> Piatto Freddo
+>=20
+> INSALATA DI RISO CON VERDURE MISTE
+>=20
+> ORZO PERLATO CON POMODORINI MOZZARELLA FIORDILATTE E BASILICO
+>=20
+>=20
+> PRIMI PIATTI DI MARE
+>=20
+> 7.00 Euro
+>=20
+> FARFALLINE DI GRAGNANO AL SALMONE
+>=20
+>=20
+> Piatto Freddo
+>=20
+> FARRO PERLATO CON TONNO PINNE GIALLE POMODORINI PACHINO E RUCOLA
+>=20
+> SECONDI PIATTI DI TERRA
+>=20
+> (Compreso Contorno)
+>=20
+> 7.50 Euro
+>=20
+> POLPETTONE DELLA CASA CON PROSCIUTTO COTTO E PROVOLA AFFUMICATA
+>=20
+> ARANCINI FATTI IN CASA CON ZAFFERANO E PISELLI
+>=20
+> SCALOPPINA CON FUNGHI CHAMPIGNON
+>=20
+> TAGLIATA ALLA ROBESPIERRE O CON RUCOLA E GRANA
+>=20
+> PROSCIUTTO NOSTRALE CON MELONE RETATO
+>=20
+> CAPRESE CON MOZZARELLA FIORDILATTE
+>=20
+> CARPACCIO DI =E2=80=9C BRESAOLA =E2=80=9D CON RUCOLA E GRANA
+>=20
+> =E2=80=9CLONZINO DI SUINO =E2=80=9D CON RUCOLA POMODORINI E GLASSA DI =
+BALSAMICO
+>=20
+>=20
+> INSALATONA =E2=80=9C P R I M A V E R A =E2=80=9D
+>=20
+> ( INSALATA MIX - MAIS - POMODORO - MOZZARELLA - TONNO - SEMINI DI =
+SESAMO )
+>=20
+>=20
+> INSALATONA =E2=80=9C C A E S A R S A L A D =E2=80=9D
+>=20
+> ( LATTUGA ROMANA - POLLO GRILL - PARMIGIANO SCAGLIE - CROSTINI DI PANE =
+)
+>=20
+>=20
+> CONTORNI
+>=20
+> 3.00 Euro
+>=20
+> INSALATA MISTA - POMODORI - PISELLI - VERDURE GRIGLIATE - PATATE =
+FRITTE
+>=20
+> =E2=80=9CAL VAPORE=E2=80=9D > CAROTE -SPINACI - BROCCOLI - FAGIOLINI - =
+CECI
+>=20
+> =E2=80=9CAL FORNO=E2=80=9D > PATATE RUSTICHE =E2=80=93 MELANZANE A =
+FUNGHETTO
+>=20
+>=20
+> Men=C3=B9 n=C2=B0 1 - 9.00 Euro
+>=20
+> Primo Piatto di Carne + Contorno + Acqua + Caff=C3=A8
+>=20
+>=20
+> Men=C3=B9 n=C2=B0 2 -12.00 Euro
+>=20
+> Primo Piatto di Carne + Secondo Piatto di Carne + Contorno + Acqua + =
+Caff=C3=A8
+>=20
+>=20
+> Men=C3=B9 n=C2=B0 1 - 10.00 Euro
+>=20
+> Primo Piatto di Pesce + Contorno + Acqua + Caff=C3=A8
+>=20
+> =E2=80=9C Doppio Senso =E2=80=9C Via Luigi Galvani, 9 E/F - 51100 - =
+Pistoia - Tel. 370.3532169
+>=20
+>  Rimuovi l'indirizzo andrea.ginanni@lotrek.it =
+<http://newsletter.promonet.it/report.php?c=3D|3|32|2783|2|2728|&s=3D87147=
+0c76c68806da4e25e8351b26ac2&i=3D286&rimuovi=3Dbb6858dcfe4819feaab4bc689ef9=
+9250>
+> =
+--------------------------------------------------------------------------=
+-- Questa e-mail =C3=A8 un servizio gratuito, inviata nel rispetto della =
+legge196/03 agli indirizzi presenti nei nostri archivi. In qualsiasi =
+momento pu=C3=B2 chiedere l=E2=80=99aggiornamento dei Suoi dati inviando =
+una e-mail a: info@lagogabbiano.it o la cancellazione da questo servizio =
+cliccando qui:
+
+
+--Apple-Mail=_1F735373-27D9-4487-B67F-D73E5DE25F1D
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dutf-8"><base></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div class=3D"">
+<div style=3D"color: rgb(0, 0, 0); letter-spacing: normal; text-align: =
+start; text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; word-wrap: =
+break-word; -webkit-nbsp-mode: space; line-break: after-white-space;" =
+class=3D""><div style=3D"color: rgb(0, 0, 0); letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; word-wrap: =
+break-word; -webkit-nbsp-mode: space; line-break: after-white-space;" =
+class=3D""><div style=3D"color: rgb(0, 0, 0); letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; word-wrap: =
+break-word; -webkit-nbsp-mode: space; line-break: after-white-space;" =
+class=3D"">&nbsp; &nbsp;&nbsp;<table width=3D"420" id=3D"signature" =
+cellspacing=3D"0" cellpadding=3D"0" border-spacing=3D"0" =
+style=3D"font-family: Calibri, Helvetica, sans-serif; color: rgb(153, =
+153, 153); font-size: 13px; width: 420px; margin: 0px; padding: 0px;" =
+class=3D""><tbody class=3D""><tr class=3D""><td class=3D""><span =
+style=3D"font-weight: normal;" class=3D""><br class=3D""><br =
+class=3D""></span></td></tr></tbody></table></div></div></div>
+</div>
+
+<div style=3D""><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">Inizio messaggio inoltrato:</div><br =
+class=3D"Apple-interchange-newline"><div style=3D"margin-top: 0px; =
+margin-right: 0px; margin-bottom: 0px; margin-left: 0px;" class=3D""><span=
+ style=3D"font-family: -webkit-system-font, Helvetica Neue, Helvetica, =
+sans-serif; color:rgba(0, 0, 0, 1.0);" class=3D""><b class=3D"">Da: =
+</b></span><span style=3D"font-family: -webkit-system-font, Helvetica =
+Neue, Helvetica, sans-serif;" class=3D"">"<a =
+href=3D"mailto:news@lagogabbiano.it" class=3D"">news@lagogabbiano.it</a>" =
+&lt;<a href=3D"mailto:news@lagogabbiano.it" =
+class=3D"">news@lagogabbiano.it</a>&gt;<br class=3D""></span></div><div =
+style=3D"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; =
+margin-left: 0px;" class=3D""><span style=3D"font-family: =
+-webkit-system-font, Helvetica Neue, Helvetica, sans-serif; =
+color:rgba(0, 0, 0, 1.0);" class=3D""><b class=3D"">Oggetto: =
+</b></span><span style=3D"font-family: -webkit-system-font, Helvetica =
+Neue, Helvetica, sans-serif;" class=3D""><b class=3D"">MENU 8.8P</b><br =
+class=3D""></span></div><div style=3D"margin-top: 0px; margin-right: =
+0px; margin-bottom: 0px; margin-left: 0px;" class=3D""><span =
+style=3D"font-family: -webkit-system-font, Helvetica Neue, Helvetica, =
+sans-serif; color:rgba(0, 0, 0, 1.0);" class=3D""><b class=3D"">Data: =
+</b></span><span style=3D"font-family: -webkit-system-font, Helvetica =
+Neue, Helvetica, sans-serif;" class=3D"">7 agosto 2019 16:35:24 CEST<br =
+class=3D""></span></div><div style=3D"margin-top: 0px; margin-right: =
+0px; margin-bottom: 0px; margin-left: 0px;" class=3D""><span =
+style=3D"font-family: -webkit-system-font, Helvetica Neue, Helvetica, =
+sans-serif; color:rgba(0, 0, 0, 1.0);" class=3D""><b class=3D"">A: =
+</b></span><span style=3D"font-family: -webkit-system-font, Helvetica =
+Neue, Helvetica, sans-serif;" class=3D""><a =
+href=3D"mailto:andrea.ginanni@lotrek.it" =
+class=3D"">andrea.ginanni@lotrek.it</a><br class=3D""></span></div><br =
+class=3D""><div class=3D"">
+
+<base href=3D"http://newsletter.promonet.it/" class=3D"">
+
+<div class=3D""><p align=3D"center" class=3D"western"><span =
+style=3D"color: #0000ff;" class=3D""><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D""><em class=3D""><span =
+style=3D"text-decoration: underline;" class=3D""><strong class=3D"">MENU' =
+DEL GIORNO </strong></span></em></span></span></span><span style=3D"color:=
+ #0000ff;" class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><em class=3D""><span style=3D"text-decoration:=
+ underline;" class=3D""><strong =
+class=3D"">8</strong></span></em></span></span></span><span =
+style=3D"color: #0000ff;" class=3D""><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D""><em class=3D""><span =
+style=3D"text-decoration: underline;" class=3D""><strong class=3D""> =
+AGOSTO 2019</strong></span></em></span></span></span></p><div =
+class=3D""><br class=3D"webkit-block-placeholder"></div><p =
+align=3D"center" class=3D"western"><span style=3D"color: #663300;" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><em class=3D""><span style=3D"text-decoration:=
+ underline;" class=3D""><strong class=3D"">PRIMI PIATTI DI =
+TERRA</strong></span></em></span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"color: #ff0000;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D""><span style=3D"text-decoration: underline;" class=3D""><strong =
+class=3D"">5.50 Euro</strong></span></span></span></span></p><p =
+align=3D"center" class=3D"western"><span style=3D"" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D"">PENNETTE RIGATE ALL=E2=80=99AMATRICIANA</span></span></span></p=
+><p align=3D"center" class=3D"western"><span style=3D"font-family: =
+Arial, sans-serif;" class=3D""><span class=3D"">TROFIE CON GORGONZOLA =
+PERE E GRANELLA DI NOCI</span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">RIGATONI ALLA NORMA</span></span></p><p =
+align=3D"center" class=3D"western"><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D"">RIGATONI ALLA POMAROLA O ALLA =
+CARRETTIERA</span></span></p><div class=3D""><br =
+class=3D"webkit-block-placeholder"></div><p align=3D"center" =
+class=3D"western"><span style=3D"color: #0000ff;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em =
+class=3D""><span style=3D"text-decoration: underline;" class=3D"">Piatto =
+Freddo</span></em></span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">INSALATA DI RISO CON VERDURE =
+MISTE</span></span></p><p align=3D"center" class=3D"western"><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D"">ORZO=
+ PERLATO CON POMODORINI MOZZARELLA FIORDILATTE E =
+BASILICO</span></span></p><div class=3D""><br =
+class=3D"webkit-block-placeholder"></div><p align=3D"center" =
+class=3D"western"><span style=3D"color: #0000ff;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em =
+class=3D""><span style=3D"text-decoration: underline;" class=3D""><strong =
+class=3D"">PRIMI PIATTI DI =
+MARE</strong></span></em></span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"color: #ff0000;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D""><span style=3D"text-decoration: underline;" class=3D""><strong =
+class=3D"">7.00 Euro</strong></span></span></span></span></p><p =
+align=3D"center" class=3D"western"><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D"">FARFALLINE DI GRAGNANO AL =
+SALMONE</span></span></p><div class=3D""><br =
+class=3D"webkit-block-placeholder"></div><p align=3D"center" =
+class=3D"western"><span style=3D"color: #0000ff;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em =
+class=3D""><span style=3D"text-decoration: underline;" class=3D"">Piatto =
+Freddo</span></em></span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">FARRO PERLATO CON TONNO PINNE GIALLE =
+POMODORINI PACHINO E RUCOLA</span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"color: #663300;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em =
+class=3D""><span style=3D"text-decoration: underline;" class=3D""><strong =
+class=3D"">SECONDI PIATTI DI =
+TERRA</strong></span></em></span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"color: #663300;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em =
+class=3D""><strong class=3D"">(Compreso =
+Contorno)</strong></em></span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"color: #ff0000;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D""><span style=3D"text-decoration: underline;" class=3D""><strong =
+class=3D"">7.50 Euro</strong></span></span></span></span></p><p =
+align=3D"center" class=3D"western"><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D"">POLPETTONE DELLA CASA CON =
+PROSCIUTTO COTTO E PROVOLA AFFUMICATA</span></span></p><p align=3D"center"=
+ class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">ARANCINI FATTI IN CASA CON ZAFFERANO E =
+PISELLI</span></span></p><p align=3D"center" class=3D"western"><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D"">SCALOPPINA CON FUNGHI CHAMPIGNON</span></span></p><p =
+align=3D"center" class=3D"western"><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D"">TAGLIATA ALLA ROBESPIERRE O CON =
+RUCOLA E GRANA</span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">PROSCIUTTO NOSTRALE CON MELONE =
+RETATO</span></span></p><p align=3D"center" class=3D"western"><span =
+style=3D"" class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">CAPRESE CON MOZZARELLA =
+FIORDILATTE</span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"" class=3D""><span style=3D"font-family: =
+Arial, sans-serif;" class=3D""><span class=3D"">CARPACCIO DI =
+</span></span></span><span style=3D"" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D""><strong class=3D"">=E2=80=9C =
+</strong></span></span></span><span style=3D"" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em =
+class=3D""><strong class=3D"">BRESAOLA =
+</strong></em></span></span></span><span style=3D"" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D""><strong class=3D"">=E2=80=9D =
+</strong></span></span></span><span style=3D"" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D"">CON =
+RUCOLA E GRANA</span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"" class=3D"">=E2=80=9C</span><span =
+style=3D"" class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><em class=3D""><strong class=3D"">LONZINO DI =
+SUINO =E2=80=9D </strong></em></span></span></span><span style=3D"" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">CON RUCOLA POMODORINI E GLASSA DI =
+BALSAMICO</span></span></span></p><div class=3D""><br =
+class=3D"webkit-block-placeholder"></div><p align=3D"center" =
+class=3D"western"><span style=3D"color: #0000ff;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em =
+class=3D""><span style=3D"text-decoration: underline;" class=3D""><strong =
+class=3D"">INSALATONA =E2=80=9C P R I M A V E R A =
+=E2=80=9D</strong></span></em></span></span></span></p><p align=3D"center"=
+ class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">( INSALATA MIX - MAIS - POMODORO - =
+MOZZARELLA - TONNO - SEMINI DI SESAMO )</span></span></p><div =
+class=3D""><br class=3D"webkit-block-placeholder"></div><p =
+align=3D"center" class=3D"western"><span style=3D"color: #008000;" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><em class=3D""><span style=3D"text-decoration:=
+ underline;" class=3D""><strong class=3D"">INSALATONA =E2=80=9C C A E S =
+A R S A L A D =E2=80=9D</strong></span></em></span></span></span></p><p =
+align=3D"center" class=3D"western"><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D"">( LATTUGA ROMANA - POLLO GRILL =
+- PARMIGIANO SCAGLIE - CROSTINI DI PANE )</span></span></p><div =
+class=3D""><br class=3D"webkit-block-placeholder"></div><p =
+align=3D"center" class=3D"western"><span style=3D"color: #355e00;" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><em class=3D""><span style=3D"text-decoration:=
+ underline;" class=3D""><strong =
+class=3D"">CONTORNI</strong></span></em></span></span></span></p><p =
+align=3D"center" class=3D"western"><span style=3D"color: #ff0000;" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><span style=3D"text-decoration: underline;" =
+class=3D""><strong class=3D"">3.00 =
+Euro</strong></span></span></span></span></p><p align=3D"center" =
+class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><em class=3D"">INSALATA MISTA - POMODORI - =
+PISELLI - VERDURE GRIGLIATE - PATATE FRITTE</em></span></span></p><p =
+align=3D"center" class=3D"western">=E2=80=9C<span style=3D"font-family: =
+Arial, sans-serif;" class=3D""><span class=3D""><em class=3D""><strong =
+class=3D"">AL VAPORE=E2=80=9D &gt;</strong></em></span></span><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D""><strong class=3D""> </strong></span></span><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D"">CAROTE -SPINACI - BROCCOLI - FAGIOLINI - =
+CECI</span></span></p><p align=3D"center" class=3D"western">=E2=80=9C<span=
+ style=3D"font-family: Arial, sans-serif;" class=3D""><span class=3D""><em=
+ class=3D""><strong class=3D"">AL FORNO=E2=80=9D &gt; =
+</strong></em></span></span><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D"">PATATE RUSTICHE =E2=80=93 =
+MELANZANE A FUNGHETTO</span></span></p><div class=3D""><br =
+class=3D"webkit-block-placeholder"></div><p align=3D"center" =
+class=3D"western"><strong class=3D""><span style=3D"color: #663300;" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><span style=3D"text-decoration: underline;" =
+class=3D""><span class=3D"">Men=C3=B9 n=C2=B0 1 - =
+</span></span></span></span></span></strong><strong class=3D""><span =
+style=3D"color: #ff0000;" class=3D""><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D""><span style=3D"text-decoration: =
+underline;" class=3D""><span class=3D"">9.00 =
+Euro</span></span></span></span></span></strong></p><p align=3D"center" =
+class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">Primo Piatto di Carne + Contorno + Acqua + =
+Caff=C3=A8</span></span></p><div class=3D""><br =
+class=3D"webkit-block-placeholder"></div><p align=3D"center" =
+class=3D"western"><strong class=3D""><span style=3D"color: #663300;" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><span style=3D"text-decoration: underline;" =
+class=3D""><span class=3D"">Men=C3=B9 n=C2=B0 2 =
+-</span></span></span></span></span></strong><strong class=3D""><span =
+style=3D"color: #ff0000;" class=3D""><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D""><span style=3D"text-decoration: =
+underline;" class=3D""><span class=3D"">12.00 =
+Euro</span></span></span></span></span></strong></p><p align=3D"center" =
+class=3D"western"><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D"">Primo Piatto di Carne + Secondo Piatto di =
+Carne + Contorno + Acqua + Caff=C3=A8</span></span></p><div class=3D""><br=
+ class=3D"webkit-block-placeholder"></div><p align=3D"center" =
+class=3D"western"><strong class=3D""><span style=3D"color: #280099;" =
+class=3D""><span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><span style=3D"text-decoration: underline;" =
+class=3D""><span class=3D"">Men=C3=B9 n=C2=B0 1 - =
+</span></span></span></span></span></strong><strong class=3D""><span =
+style=3D"color: #ff0000;" class=3D""><span style=3D"font-family: Arial, =
+sans-serif;" class=3D""><span class=3D""><span style=3D"text-decoration: =
+underline;" class=3D""><span class=3D"">10.00 =
+Euro</span></span></span></span></span></strong></p><p align=3D"center" =
+class=3D"western"><span style=3D"color: #008000;" class=3D""><span =
+style=3D"font-family: Arial, sans-serif;" class=3D""><span =
+class=3D"">Primo Piatto di Pesce + Contorno + Acqua + =
+Caff=C3=A8</span></span></span></p><p align=3D"center" =
+class=3D"western"><strong class=3D""><span style=3D"color: #800000;" =
+class=3D"">=E2=80=9C <span style=3D"font-family: Arial, sans-serif;" =
+class=3D""><span class=3D""><em class=3D""><strong class=3D"">Doppio =
+Senso =E2=80=9C Via Luigi Galvani, 9 E/F - 51100 - Pistoia - Tel. =
+370.3532169</strong></em></span></span></span></strong></p>
+</div>
+<img =
+src=3D"http://newsletter.promonet.it/report.php?c=3D|3|32|2783|2|2728|&amp=
+;s=3D871470c76c68806da4e25e8351b26ac2&amp;i=3D286" width=3D"1" =
+height=3D"1" class=3D"">
+<a =
+href=3D"http://newsletter.promonet.it/report.php?c=3D|3|32|2783|2|2728|&am=
+p;s=3D871470c76c68806da4e25e8351b26ac2&amp;i=3D286&amp;rimuovi=3Dbb6858dcf=
+e4819feaab4bc689ef99250" class=3D"">Rimuovi l'indirizzo =
+andrea.ginanni@lotrek.it</a><br =
+class=3D"">---------------------------------------------------------------=
+-------------
+Questa e-mail =C3=A8 un servizio gratuito, inviata nel rispetto della =
+legge196/03 agli indirizzi presenti nei nostri archivi. In qualsiasi =
+momento pu=C3=B2 chiedere l=E2=80=99aggiornamento dei Suoi dati inviando =
+una e-mail a: <a href=3D"mailto:info@lagogabbiano.it" =
+class=3D"">info@lagogabbiano.it</a> o la cancellazione da questo =
+servizio cliccando qui:</div></blockquote></div><br =
+class=3D""></body></html>=
+
+--Apple-Mail=_1F735373-27D9-4487-B67F-D73E5DE25F1D--
