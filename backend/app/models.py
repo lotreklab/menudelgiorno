@@ -2,6 +2,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 
 FIRST_CONTENT_TYPES = [('0', 'Terra'), ('1', 'Mare')]
+FIRST_DISH_TYPE = [('0', 'Caldo'), ('1', 'Freddo')]
 SECOND_CONTENT_TYPES = [('0', 'Terra'), ('1', 'Insalatona')]
 SIDE_COOKING_TYPES = [('0', 'Vapore'), ('1', 'Forno'), ('2', 'Non definito')]
 
@@ -10,6 +11,7 @@ class Course(PolymorphicModel):
 
 class FirstCourse(Course):
     contentType = models.CharField(max_length=1, choices=FIRST_CONTENT_TYPES)
+    dishType = models.CharField(max_length=1, choices=FIRST_DISH_TYPE)
 
 class SecondCourse(Course):
     contentType = models.CharField(max_length=1, choices=SECOND_CONTENT_TYPES)

@@ -22,7 +22,7 @@ from django.urls import path, include
 from app import views
 
 router = routers.SimpleRouter()
-#router.register(r'courses', views.CourseViewSet)
+router.register(r'courses', views.CourseViewSet)
 router.register(r'menus', views.MenuViewSet)
 router.register(r'content', views.ContentMenuViewSet)
 

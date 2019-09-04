@@ -2,30 +2,27 @@ from rest_framework import serializers
 from rest_polymorphic.serializers import PolymorphicSerializer
 from app import models
 
-class MenuSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = models.Menu
-        fields = ['id', 'consumeDate', 'sendDate']
 
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
+
+class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
         fields = ['id', 'name']
 
-class FirstCourseSerializer(serializers.HyperlinkedModelSerializer):
+class FirstCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FirstCourse
-        fields = ['id', 'contentType']
+        fields = ['id', 'name', 'contentType']
 
-class SecondCourseSerializer(serializers.HyperlinkedModelSerializer):
+class SecondCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SecondCourse
-        fields = ['id', 'contentType']
+        fields = ['id', 'name', 'contentType']
 
-class SideCourseSerializer(serializers.HyperlinkedModelSerializer):
+class SideCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SideCourse
-        fields = ['id', 'cookingType']
+        fields = ['id', 'name', 'cookingType']
         
 class CoursePolymorphicSerializer(PolymorphicSerializer):
     resource_type_field_name = 'category'
@@ -36,7 +33,17 @@ class CoursePolymorphicSerializer(PolymorphicSerializer):
         models.SideCourse: SideCourseSerializer
     }
 
-class ContentMenuSerializer(serializers.HyperlinkedModelSerializer):
+class CustomField(serializers.Field):
+    def to_representation(self, value):
+        return {'id': value.id, 'price': value.price}
+
+class ContentMenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ContentMenu
         fields = ['course', 'menu', 'price']
+
+class MenuSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Menu
+        fields = ['id', 'consumeDate', 'sendDate', 'courses']
+    
