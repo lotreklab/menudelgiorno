@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load l10n %}
+
+{% block content %}
+    <h2>Menù di {{ menu.consumeDate | date:'l j F Y' }}</h2>
+    <small>Ricevuto il {{ menu.sendDate | date:'d/m/Y' }} alle ore {{ menu.sendDate | date:'H:i' }}</small>
+
+    <h4 class="mt-5">Primi</h4>
+    <div class="list-group">
+        {% for dish in first %}
+            <a href="/web/course/{{ dish.course.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ dish.course}}
+                <span class="badge badge-primary badge-pill">{{ dish.price | floatformat:2 }} €</span>
+            </a>
+        {% endfor %}
+    </div>
+
+    <h4 class="mt-5">Secondi</h4>
+    <div class="list-group">
+        {% for dish in second %}
+            <a href="/web/course/{{ dish.course.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <span class="flex-grow-1">{{ dish.course }}</span>
+                <span class="badge badge-primary badge-pill">{{ dish.price | floatformat:2 }} €</span>
+            </a>
+        {% endfor %}
+    </div>
+
+    <h4 class="mt-5">Contorni</h4>
+    <div class="list-group">
+        {% for dish in side %}
+            <a href="/web/course/{{ dish.course.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ dish.course }}
+                <span class="badge badge-primary badge-pill">{{ dish.price | floatformat:2 }} €</span>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
