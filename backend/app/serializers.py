@@ -31,10 +31,6 @@ class CoursePolymorphicSerializer(PolymorphicSerializer):
         models.SideCourse: SideCourseSerializer
     }
 
-class CustomField(serializers.Field):
-    def to_representation(self, value):
-        return {'id': value.id, 'price': value.price}
-
 class ContentMenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ContentMenu

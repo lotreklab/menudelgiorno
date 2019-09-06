@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load l10n %}
+
+{% block content %}
+    <h2>Ultimi Menù</h2>
+
+    <div class="list-group">
+        {% for menu in menus %}
+            <a href="/web/menu/{{ menu.id }}" class="list-group-item list-group-item-action">
+                Menù del {{ menu.consumeDate | date:'j F Y' }}
+            </a>
+        {% endfor %}
+    </div>
+
+    {% if menus.has_other_pages %}
+        <nav aria-label="Page navigation example" class="mt-3">
+            <ul class="pagination">
+                {% if menus.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ menus.previous_page_number }}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a></li>
+                {% endif %}
+
+                {% for i in menus.paginator.page_range %}
+                    {% if i < menus.number|add:5 and i > menus.number|add:-5 %}
+                        {% if menus.number == i %}
+                            <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if menus.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ menus.next_page_number }}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}

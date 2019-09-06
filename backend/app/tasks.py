@@ -94,6 +94,7 @@ def elaborate_email(message):
                 notes = None
                 if re.findall(r"\((.*)\)", line):
                     notes = re.findall(r"\((.*)\)", line)[0][0]
+                line = re.sub(r"\((.*)\)", '', line)
                 dish = dish_type.objects.get_or_create(name=line, contentType=second_dish_type, notes=notes)
                 ContentMenu.objects.create(course=dish[0], menu=menu, price=price)
             elif dish_type is SideCourse:

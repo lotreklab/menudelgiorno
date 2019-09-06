@@ -23,13 +23,14 @@ from django.urls import path, include
 from app import views
 
 router = routers.SimpleRouter()
-router.register(r'courses', views.CourseViewSet)
-#router.register(r'menus', views.MenuViewSet)
-#router.register(r'content', views.ContentMenuViewSet)
+router.register(r'course', views.CourseViewSet)
+router.register(r'menu', views.MenuViewSet)
+router.register(r'content', views.ContentMenuViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path(r'web/', include('web.urls')),
+    url('', include(router.urls))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
