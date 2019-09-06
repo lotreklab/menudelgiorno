@@ -2,7 +2,7 @@ import requests
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
-
+from datetime import date
 from app.models import Menu
 
 from app.models import FirstCourse, SecondCourse, ContentMenu, SideCourse, Course
@@ -29,9 +29,9 @@ def course_view(request, pk):
 
 
 def menu_list(request):
-    menu_data = Menu.objects.all()
+    menu_today = Menu.objects.filter(consumeDate=date.today()).first()
+    menu_data = Menu.objects.all().order_by('-consumeDate')
     page = request.GET.get('page', 1)
-
     paginator = Paginator(menu_data, 10)
     try:
         menus = paginator.page(page)
@@ -40,4 +40,4 @@ def menu_list(request):
     except EmptyPage:
         menus = paginator.page(paginator.num_pages)
 
-    return render(request, 'menu_list.html', {'menus': menus})
+    return render(request, 'menu_list.html', {'menus': menus, 'menu_today': menu_today })

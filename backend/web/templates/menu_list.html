@@ -3,14 +3,33 @@
 {% load l10n %}
 
 {% block content %}
+    <h2>Menù di oggi</h2>
+    <div class="list-group">
+        {% if menu_today %}
+        <a href="/web/menu/{{ menu_today.id }}" class="list-group-item list-group-item-action">
+            Menù del {{ menu_today.consumeDate | date:'j F Y' }}
+        </a>
+        {% else %}
+        <a class="alert alert-dark">
+            Non ancora pubblicato
+        </a>
+        {% endif %}
+    </div>
+    <br>
     <h2>Ultimi Menù</h2>
 
     <div class="list-group">
+        {% if menus %}
         {% for menu in menus %}
             <a href="/web/menu/{{ menu.id }}" class="list-group-item list-group-item-action">
                 Menù del {{ menu.consumeDate | date:'j F Y' }}
             </a>
         {% endfor %}
+        {% else %}
+        <a class="alert alert-dark">
+                Non ancora pubblicati
+            </a>
+        {% endif %}
     </div>
 
     {% if menus.has_other_pages %}

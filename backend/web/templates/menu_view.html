@@ -8,31 +8,49 @@
 
     <h4 class="mt-5">Primi</h4>
     <div class="list-group">
+        {% if first %}
         {% for dish in first %}
             <a href="/web/course/{{ dish.course.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 {{ dish.course}}
                 <span class="badge badge-primary badge-pill">{{ dish.price | floatformat:2 }} €</span>
             </a>
         {% endfor %}
+        {% else %}
+            <a class="alert alert-dark">
+                    Non vi sono primi in questo menù
+                </a>
+        {% endif %}
     </div>
 
     <h4 class="mt-5">Secondi</h4>
     <div class="list-group">
+        {% if second %}
         {% for dish in second %}
             <a href="/web/course/{{ dish.course.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 <span class="flex-grow-1">{{ dish.course }}</span>
                 <span class="badge badge-primary badge-pill">{{ dish.price | floatformat:2 }} €</span>
             </a>
         {% endfor %}
+        {% else %}
+            <a class="alert alert-dark">
+                    Non vi sono secondi in questo menù
+                </a>
+        {% endif %}
     </div>
 
     <h4 class="mt-5">Contorni</h4>
     <div class="list-group">
+        {% if second %}
         {% for dish in side %}
             <a href="/web/course/{{ dish.course.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 {{ dish.course }}
                 <span class="badge badge-primary badge-pill">{{ dish.price | floatformat:2 }} €</span>
             </a>
         {% endfor %}
+        {% else %}
+            <a class="alert alert-dark">
+                    Non vi sono contorni in questo menù
+                </a>
+        {% endif %}
     </div>
 {% endblock %}
