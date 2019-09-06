@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="{% static 'course_view.css' %}">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark bg-primary d-flex justify-content-between">
         <a class="navbar-brand mb-0 h1" href="/web">Menù del giorno</a>
+        {% if request.user.is_authenticated %}
+            <span class="text-light">Ciao {{ request.user.username }}</span>
+        {% else %}
+            <a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.avatar&client_id=8649554852.752954419415&state={{ request.path }}&redirect_uri=http://{{ request.get_host }}/web/login">
+                <img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
+            </a>
+        {% endif %}
     </nav>
     <div class="w-100" style="height:50px;"></div>
     <div class="container">

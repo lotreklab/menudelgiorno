@@ -1,11 +1,19 @@
 import requests
+from django.contrib.auth import login
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
+import os
 
 from app.models import Menu
 
 from app.models import FirstCourse, SecondCourse, ContentMenu, SideCourse, Course
+
+from web.models import SlackUser
+
+CLIENT_ID = os.environ['SLACK_CLIENT_ID']
+CLIENT_SECRET = os.environ['SLACK_CLIENT_SECRET']
 
 
 def menu_view(request, pk):
@@ -29,7 +37,7 @@ def course_view(request, pk):
 
 
 def menu_list(request):
-    menu_data = Menu.objects.all()
+    menu_data = Menu.objects.all().order_by('-id')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(menu_data, 10)
@@ -41,3 +49,21 @@ def menu_list(request):
         menus = paginator.page(paginator.num_pages)
 
     return render(request, 'menu_list.html', {'menus': menus})
+
+
+def login_view(request):
+    token_response = requests.get("https://slack.com/api/oauth.access", params={
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET,
+        'code': request.GET['code'],
+        'request_uri': request.build_absolute_uri()
+    }).json()
+    if token_response['ok']:
+        user = SlackUser.objects.update_or_create(slack_id=token_response['user']['id'],
+                                                  username=token_response['user']['name'],
+                                                  avatar=token_response['user']['image_72'],
+                                                  access_token=token_response['access_token'])[0]
+        login(request, user)
+        return redirect(request.build_absolute_uri(request.GET['state']))
+    else:
+        return redirect(request.build_absolute_uri('/web'))
