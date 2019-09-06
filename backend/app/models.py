@@ -14,19 +14,16 @@ class Course(PolymorphicModel):
     def __str__(self):
         return self.name.capitalize()
 
-    def description(self):
-        return str(self.notes if self.notes else "").capitalize()
-
 
 class FirstCourse(Course):
     contentType = models.CharField(max_length=1, choices=FIRST_CONTENT_TYPES)
     cookingType = models.CharField(max_length=1, choices=FIRST_COOKING_TYPES)
 
     def description(self):
-        notes = super().description()
         dish_notes = "Primo %s di %s\n" % (self.get_cookingType_display().lower(),
                                            self.get_contentType_display().lower())
-        return dish_notes + notes
+        return dish_notes
+
 
 class SecondCourse(Course):
     contentType = models.CharField(max_length=1, choices=SECOND_CONTENT_TYPES)
@@ -35,9 +32,8 @@ class SecondCourse(Course):
         return ("Insalatona %s" if self.contentType == 'I' else "%s") % super().__str__()
 
     def description(self):
-        notes = super().description()
         dish_notes = ("Secondo di %s" if self.contentType == 'T' else "%s") % self.get_contentType_display()
-        return dish_notes + notes
+        return dish_notes
 
 
 class SideCourse(Course):
@@ -50,9 +46,8 @@ class SideCourse(Course):
             return super().__str__()
 
     def description(self):
-        notes = super().description()
         dish_notes = "Contorno con cottura al %s" % self.get_cookingType_display().lower() if self.cookingType != 'N' else "Contorno semplice"
-        return dish_notes + notes
+        return dish_notes
 
 
 class Menu(models.Model):

@@ -1,5 +1,6 @@
 #image-container {
     position: relative;
+    display: inline-block;
 }
 
 #image-caption {
@@ -9,4 +10,9 @@
     right: 0px;
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+#info-image {
+    font-size: 10pt;
+    color: gray;
 }

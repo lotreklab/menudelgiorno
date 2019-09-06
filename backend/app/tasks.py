@@ -19,9 +19,11 @@ DATE_REGEX = r"menu' del giorno ([0-9]{1,2} (gennaio|febbraio|marzo|aprile|maggi
 PRICE_REGEX = r"^([0-9]\.*[0-9]*) euro$"
 
 setlocale(LC_TIME, 'it_IT')
+'''
 gmailConnection = imaplib.IMAP4_SSL("imap.gmail.com", 993)
 gmailConnection.login('email', 'password')
 gmailConnection.select('INBOX')
+'''
 
 def normalize_words(word):
     word = word.strip()
@@ -93,7 +95,7 @@ def elaborate_email(message):
             elif dish_type is SecondCourse:
                 notes = None
                 if re.findall(r"\((.*)\)", line):
-                    notes = re.findall(r"\((.*)\)", line)[0][0]
+                    notes = re.findall(r"\((.*)\)", line)[0].strip()
                 line = re.sub(r"\((.*)\)", '', line)
                 dish = dish_type.objects.get_or_create(name=line, contentType=second_dish_type, notes=notes)
                 ContentMenu.objects.create(course=dish[0], menu=menu, price=price)
@@ -106,12 +108,14 @@ def elaborate_email(message):
 
 @periodic_task(crontab(minute="*"))
 def receive_email():
+    '''
     result, data = gmailConnection.search(None, '(ALL)')
     ids = data[0]
     id_list = ids.split()
     result, data = gmailConnection.fetch(id_list[-1], "(RFC822)")
     raw_email = data[0][1]
     pprint(raw_email)
+    '''
     message = message_from_file(open(path.join("..", "fake_data", "MENU_8.8P.eml")))
     if not Menu.objects.filter(sendDate=parsedate_to_datetime(message.get('Date'))):
         elaborate_email(message)
