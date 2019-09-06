@@ -1,13 +1,9 @@
 import re
-import time
 
 import requests
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
-from app import models
 from app import serializers
 
 from app.models import Course, Menu, ContentMenu
@@ -44,4 +40,3 @@ class MenuViewSet(viewsets.ModelViewSet):
 class ContentMenuViewSet(viewsets.ModelViewSet):
     queryset = ContentMenu.objects.all()
     serializer_class = serializers.ContentMenuSerializer
-

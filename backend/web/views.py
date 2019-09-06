@@ -1,7 +1,6 @@
 import requests
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
 from app.models import Menu

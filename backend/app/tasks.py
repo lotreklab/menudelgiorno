@@ -100,5 +100,5 @@ def elaborate_email(message):
 @periodic_task(crontab(minute="*"))
 def receive_email():
     message = message_from_file(open(path.join("..", "fake_data", "MENU_8.8P.eml")))
-    #if not Menu.objects.filter(sendDate=parsedate_to_datetime(message.get('Date'))):
-    elaborate_email(message)
+    if not Menu.objects.filter(sendDate=parsedate_to_datetime(message.get('Date'))):
+        elaborate_email(message)
