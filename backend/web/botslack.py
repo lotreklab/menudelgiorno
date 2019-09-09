@@ -6,9 +6,8 @@ import slack
 slack_token = os.environ['SLACK_BOT_TOKEN']
 client = slack.WebClient(token=slack_token)
 
-while True:
+def sendMenuMessage():
     client.chat_postMessage(
     channel="testbotmenu",
-    text="prova"
+    text="Menù di oggi"
     )
-    time.sleep(10)

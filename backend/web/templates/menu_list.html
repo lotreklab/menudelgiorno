@@ -21,9 +21,22 @@
     <div class="list-group">
         {% if menus %}
         {% for menu in menus %}
-            <a href="/web/menu/{{ menu.id }}" class="list-group-item list-group-item-action">
+            <a href="/web/menu/{{ menu.id }}" class="list-group-item animation-list-menu list-group-item-action">
                 Menù del {{ menu.consumeDate | date:'j F Y' }}
             </a>
+            <script>
+                    var items = document.getElementsByClassName("animation-list-menu")
+                    for(var i = 0; i < items.length; i ++){
+                        var item = toggleAnimation(i, items);
+                        setTimeout(item, i*30);
+                    }   
+                    function toggleAnimation(i, items) {
+                        var animationItem = items[i];
+                        return function() {
+                            animationItem.classList.toggle('enter');
+                        }
+                    }
+            </script>
         {% endfor %}
         {% else %}
         <a class="alert alert-dark">

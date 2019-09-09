@@ -1,6 +1,9 @@
 import re
 import imaplib
 import email
+import os
+import slack
+import time
 from pprint import pprint
 from datetime import datetime
 
@@ -14,11 +17,13 @@ from huey.contrib.djhuey import periodic_task
 from os import path
 
 from app.models import Menu, FirstCourse, SecondCourse, SideCourse, ContentMenu
-
 DATE_REGEX = r"menu' del giorno ([0-9]{1,2} (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre){1} [0-9]{4})"
 PRICE_REGEX = r"^([0-9]\.*[0-9]*) euro$"
 
+
 setlocale(LC_TIME, 'it_IT')
+slack_token = os.environ['SLACK_BOT_TOKEN']
+client = slack.WebClient(token=slack_token)
 '''
 gmailConnection = imaplib.IMAP4_SSL("imap.gmail.com", 993)
 gmailConnection.login('email', 'password')
@@ -103,10 +108,10 @@ def elaborate_email(message):
                 for name_dish in re.split(r"[‐‑‒–−𐆑\-]", line):
                     dish = dish_type.objects.get_or_create(name=name_dish.strip(), cookingType=cooking)
                     ContentMenu.objects.create(course=dish[0], menu=menu, price=price)
+    return menu
 
 
-
-@periodic_task(crontab(minute="*"))
+@periodic_task(crontab(minute="*", hour="7-11"))
 def receive_email():
     '''
     result, data = gmailConnection.search(None, '(ALL)')
@@ -118,4 +123,14 @@ def receive_email():
     '''
     message = message_from_file(open(path.join("..", "fake_data", "MENU_8.8P.eml")))
     if not Menu.objects.filter(sendDate=parsedate_to_datetime(message.get('Date'))):
-        elaborate_email(message)
+        menu = elaborate_email(message)
+        sendMenuMessage(getattr(menu, 'id'), getattr(menu, 'consumeDate'))
+
+def sendMenuMessage(id, consumeDate):
+    titleAttachment = ("Menù di oggi (" + consumeDate.strftime("%d/%m/%Y") + ")")
+    linkAttachment = ("http://localhost:8000/web/menu/" + str(id) + "/")
+    client.chat_postMessage(
+    channel="testbotmenu",
+    text="È uscito il menù di oggi! :green_salad:",
+    attachments='[{"title": "' + titleAttachment + '", "title_link": "' + linkAttachment + '", "color": "#36a64f"}]'
+    )

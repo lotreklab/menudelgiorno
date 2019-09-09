@@ -11,8 +11,8 @@ from app.models import FirstCourse, SecondCourse, ContentMenu, SideCourse, Cours
 
 from web.models import SlackUser
 
-CLIENT_ID = os.environ['SLACK_CLIENT_ID']
-CLIENT_SECRET = os.environ['SLACK_CLIENT_SECRET']
+#CLIENT_ID = os.environ['SLACK_CLIENT_ID']
+#CLIENT_SECRET = os.environ['SLACK_CLIENT_SECRET']
 
 
 def menu_view(request, pk):
@@ -46,10 +46,9 @@ def menu_list(request):
         menus = paginator.page(1)
     except EmptyPage:
         menus = paginator.page(paginator.num_pages)
-
     return render(request, 'menu_list.html', {'menus': menus, 'menu_today': menu_today})
 
-
+'''
 def login_view(request):
     token_response = requests.get("https://slack.com/api/oauth.access", params={
         'client_id': CLIENT_ID,
@@ -66,3 +65,4 @@ def login_view(request):
         return redirect(request.build_absolute_uri(request.GET['state']))
     else:
         return redirect(request.build_absolute_uri('/web'))
+'''

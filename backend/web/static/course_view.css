@@ -16,3 +16,39 @@
     font-size: 10pt;
     color: gray;
 }
+.animation-list-first{
+    display: none;
+    opacity: 0;
+    transition: all 0.5s;
+}
+.animation-list-first.enter{
+    display: block;
+    opacity: 1;
+}
+.animation-list-second{
+    display: none;
+    opacity: 0;
+    transition: all 0.5s;
+}
+.animation-list-second.enter{
+    display: block;
+    opacity: 1;
+}
+.animation-list-side{
+    display: none;
+    opacity: 0;
+    transition: all 0.5s;
+}
+.animation-list-side.enter{
+    display: block;
+    opacity: 1;
+}
+.animation-list-menu{
+    display: none;
+    opacity: 0;
+    transition: all 0.5s;
+}
+.animation-list-menu.enter{
+    display: block;
+    opacity: 1;
+}
