@@ -3,8 +3,8 @@
 {% load l10n %}
 
 {% block content %}
-    <h2>Menù di {{ menu.consumeDate | date:'l j F Y' }}</h2>
-    <small>Ricevuto il {{ menu.sendDate | date:'d/m/Y' }} alle ore {{ menu.sendDate | date:'H:i' }}</small>
+    <h2>Menù di {{ menu.consume_date | date:'l j F Y' }}</h2>
+    <small>Ricevuto il {{ menu.send_date | date:'d/m/Y' }} alle ore {{ menu.send_date | date:'H:i' }}</small>
 
     <h4 class="mt-5">Primi</h4>
     <div class="list-group">
@@ -53,19 +53,6 @@
         {% endif %}
     </div>
     <script>
-        function animationList(className){
-            var items = document.getElementsByClassName(className)
-            for(var i = 0; i < items.length; i ++){
-                var item = toggleAnimation(i, items);
-                setTimeout(item, i*30);
-            }   
-        }
-        function toggleAnimation(i, items) {
-                var animationItem = items[i];
-                return function() {
-                    animationItem.classList.toggle('enter');
-                }
-        } 
         animationList("animation-list-first")
         animationList("animation-list-second")
         animationList("animation-list-side")

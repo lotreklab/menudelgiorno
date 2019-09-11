@@ -10,20 +10,53 @@
             {% if course.notes %}
                 <div class="mt-2">{{ course.notes | capfirst }}</div>
             {% endif %}
+            <div class="alert alert-info mt-5" role="alert">
+                Questo piatto è stato presentato in {{ count }} menu!
+            </div>
         </div>
         <div class="col-sm-12 col-md-6 text-center">
             <div id="image-container" class="mt-3">
                 <img id="dish-image" class="w-100 h-auto rounded">
-                <a id="image-caption" class="p-2 rounded-bottom"></a>
+                <a id="image-caption" class="p-2 rounded-bottom" target="_blank"></a>
             </div>
             <div id="info-image">
                 Questa immagine non rappresenta il piatto effettivamente offerto dal bar.
             </div>
         </div>
     </div>
-    <div class="alert alert-info mt-5" role="alert">
-        Questo piatto è stato presentato in {{ count }} menu!
+
+    <div class="mt-5">
+        <div class="d-flex justify-content-between">
+            <h4>Recensioni</h4>
+            {% if user_has_reviewed == False and request.user.is_authenticated %}
+                <a href="review" class="btn btn-primary">Scrivi la tua recensione</a>
+            {% endif %}
+        </div>
+        {% for review in reviews %}
+            <div class="card m-3">
+                <div class="card-header">
+                    <img src="{{ review.user.avatar }}" class="avatar-img">
+                    <b class="ml-2">{{ review.user.username }}</b>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        {% for i in review.get_score_list %}
+                            {% if i %}
+                                <i class="material-icons">star</i>
+                            {% else %}
+                                <i class="material-icons">star_border</i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="card-text">{{ review.text }}</p>
+                    {% if review.user == request.user %}
+                        <a href="review" class="btn btn-primary">Modifica</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
     </div>
+
 
     <script>
         fetch('/course/{{ course.id }}/image_search/').then(response => {

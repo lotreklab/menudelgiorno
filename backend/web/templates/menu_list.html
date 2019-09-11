@@ -7,7 +7,7 @@
     <div class="list-group">
         {% if menu_today %}
         <a href="/web/menu/{{ menu_today.id }}" class="list-group-item list-group-item-action">
-            Menù del {{ menu_today.consumeDate | date:'j F Y' }}
+            Menù del {{ menu_today.consume_date | date:'j F Y' }}
         </a>
         {% else %}
         <a class="alert alert-dark">
@@ -21,22 +21,9 @@
     <div class="list-group">
         {% if menus %}
         {% for menu in menus %}
-            <a href="/web/menu/{{ menu.id }}" class="list-group-item animation-list-menu list-group-item-action">
-                Menù del {{ menu.consumeDate | date:'j F Y' }}
+            <a href="/web/menu/{{ menu.id }}" class="list-group-item list-group-item-action">
+                Menù del {{ menu.consume_date | date:'j F Y' }}
             </a>
-            <script>
-                    var items = document.getElementsByClassName("animation-list-menu")
-                    for(var i = 0; i < items.length; i ++){
-                        var item = toggleAnimation(i, items);
-                        setTimeout(item, i*30);
-                    }   
-                    function toggleAnimation(i, items) {
-                        var animationItem = items[i];
-                        return function() {
-                            animationItem.classList.toggle('enter');
-                        }
-                    }
-            </script>
         {% endfor %}
         {% else %}
         <a class="alert alert-dark">
@@ -44,7 +31,6 @@
             </a>
         {% endif %}
     </div>
-
     {% if menus.has_other_pages %}
         <nav aria-label="Page navigation example" class="mt-3">
             <ul class="pagination">
@@ -53,7 +39,6 @@
                         <span aria-hidden="true">&laquo;</span>
                     </a></li>
                 {% endif %}
-
                 {% for i in menus.paginator.page_range %}
                     {% if i < menus.number|add:5 and i > menus.number|add:-5 %}
                         {% if menus.number == i %}

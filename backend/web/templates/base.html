@@ -4,17 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Menù del giorno</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'course_view.css' %}">
-    <script src="{% static 'course_animations.js' %}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <script src="{% static 'course_animations.js' %}"></script>
     <nav class="navbar navbar-dark bg-primary d-flex justify-content-between">
         <a class="navbar-brand mb-0 h1" href="/web">Menù del giorno</a>
         {% if request.user.is_authenticated %}
-            <span class="text-light">Ciao {{ request.user.username }}</span>
+            <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ciao {{ request.user.username }}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="{% url 'logout' %}" class="dropdown-item">Esci</a>
+                    </div>
+                </div>
         {% else %}
-            <a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.avatar&client_id=8649554852.752954419415&state={{ request.path }}&redirect_uri=http://{{ request.get_host }}/web/login">
+            <a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.avatar&client_id=8649554852.752954419415&state={{ request.path }}&redirect_uri={{ request.scheme }}://{{ request.get_host }}{% url 'login' %}">
                 <img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
             </a>
         {% endif %}

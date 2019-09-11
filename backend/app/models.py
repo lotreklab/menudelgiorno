@@ -16,43 +16,43 @@ class Course(PolymorphicModel):
 
 
 class FirstCourse(Course):
-    contentType = models.CharField(max_length=1, choices=FIRST_CONTENT_TYPES)
-    cookingType = models.CharField(max_length=1, choices=FIRST_COOKING_TYPES)
+    content_type = models.CharField(max_length=1, choices=FIRST_CONTENT_TYPES)
+    cooking_type = models.CharField(max_length=1, choices=FIRST_COOKING_TYPES)
 
     def description(self):
-        dish_notes = "Primo %s di %s\n" % (self.get_cookingType_display().lower(),
-                                           self.get_contentType_display().lower())
+        dish_notes = "Primo %s di %s\n" % (self.get_cooking_type_display().lower(),
+                                           self.get_content_type_display().lower())
         return dish_notes
 
 
 class SecondCourse(Course):
-    contentType = models.CharField(max_length=1, choices=SECOND_CONTENT_TYPES)
+    content_type = models.CharField(max_length=1, choices=SECOND_CONTENT_TYPES)
 
     def __str__(self):
-        return ("Insalatona %s" if self.contentType == 'I' else "%s") % super().__str__()
+        return ("Insalatona %s" if self.content_type == 'I' else "%s") % super().__str__()
 
     def description(self):
-        dish_notes = ("Secondo di %s" if self.contentType == 'T' else "%s") % self.get_contentType_display()
+        dish_notes = ("Secondo di %s" if self.content_type == 'T' else "%s") % self.get_content_type_display()
         return dish_notes
 
 
 class SideCourse(Course):
-    cookingType = models.CharField(max_length=1, choices=SIDE_COOKING_TYPES)
+    cooking_type = models.CharField(max_length=1, choices=SIDE_COOKING_TYPES)
 
     def __str__(self):
-        if self.cookingType != 'N':
-            return "%s al %s" % (super().__str__(), self.get_cookingType_display().lower())
+        if self.cooking_type != 'N':
+            return "%s al %s" % (super().__str__(), self.get_cooking_type_display().lower())
         else:
             return super().__str__()
 
     def description(self):
-        dish_notes = "Contorno con cottura al %s" % self.get_cookingType_display().lower() if self.cookingType != 'N' else "Contorno semplice"
+        dish_notes = "Contorno con cottura al %s" % self.get_cooking_type_display().lower() if self.cooking_type != 'N' else "Contorno semplice"
         return dish_notes
 
 
 class Menu(models.Model):
-    consumeDate = models.DateField()
-    sendDate = models.DateTimeField()
+    consume_date = models.DateField()
+    send_date = models.DateTimeField()
     courses = models.ManyToManyField(Course, through='ContentMenu')
 
 

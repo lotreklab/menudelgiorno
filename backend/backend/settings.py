@@ -24,7 +24,7 @@ SECRET_KEY = 'i+bn07hfm(($0skpd!#2-vj&!e&fj0e%4q1cp8s7o=dr--8vb%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.92', 'd66143af.ngrok.io']
 
 # Application definition
 
@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'it-it'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Rome'
 
 USE_I18N = True
 
@@ -120,13 +120,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+UTC = False
+
 HUEY = {
     'huey_class': 'huey.RedisHuey',  # Huey implementation to use.
     'name': DATABASES['default']['NAME'],  # Use db name for huey.
-    'results': True,  # Store return values of tasks.
-    'store_none': False,  # If a task returns None, do not save to results.
     'immediate': False,  # If DEBUG=True, run synchronously.
-    'utc': True,  # Use UTC for all times internally.
+    'utc': False,  # Use UTC for all times internally.
     'blocking': True,  # Perform blocking pop rather than poll Redis.
     'connection': {
         'host': 'localhost',
@@ -149,7 +149,7 @@ HUEY = {
         'periodic': True,  # Enable crontab feature.
         'check_worker_health': True,  # Enable worker health checks.
         'health_check_interval': 1,  # Check worker health every second.
-    },
+    }
 }
 
 AUTH_USER_MODEL = 'web.SlackUser'

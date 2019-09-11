@@ -12,19 +12,19 @@ class CourseSerializer(serializers.ModelSerializer):
 class FirstCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FirstCourse
-        fields = ['id', 'name', 'contentType']
+        fields = ['id', 'name', 'content_type']
 
 
 class SecondCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SecondCourse
-        fields = ['id', 'name', 'contentType']
+        fields = ['id', 'name', 'content_type']
 
 
 class SideCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SideCourse
-        fields = ['id', 'name', 'cookingType']
+        fields = ['id', 'name', 'cooking_type']
 
 
 class CoursePolymorphicSerializer(PolymorphicSerializer):
@@ -46,4 +46,4 @@ class ContentMenuSerializer(serializers.ModelSerializer):
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Menu
-        fields = ['id', 'consumeDate', 'sendDate', 'courses']
+        fields = ['id', 'consume_date', 'send_date', 'courses']

@@ -46,9 +46,12 @@
 .animation-list-menu{
     display: none;
     opacity: 0;
-    transition: all 0.5s;
+    transition: opacity 0.5s;
 }
 .animation-list-menu.enter{
     display: block;
     opacity: 1;
+}
+.avatar-img {
+    width: 36px;
 }
